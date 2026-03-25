@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shopify custom APIs & integrations
 
-## Getting Started
+This project is a **backend service** for Shopify stores. It hosts secure HTTP APIs that connect your shops to **custom business rules**, **third-party systems**, and **automation**—things Shopify alone does not provide out of the box.
 
-First, run the development server:
+## What it is used for
+
+- **Store-specific logic** — Different brands (for example wellness, tea, supplements, organic goods) can each have their own endpoints and settings while sharing one codebase.
+- **Shopify Admin API** — Creates and updates customers, products, discounts, orders, fulfillments, and metafields through GraphQL, with validation and error handling.
+- **Third-party platforms** — Integrates with external services (for example product sync to other commerce or logistics platforms) using scheduled jobs and APIs.
+- **Compliance & data checks** — Examples include validating VAT numbers against official EU services before you treat a customer as VAT-registered.
+- **Orders & fulfillment** — Reacts to external events (for example webhooks) to update order or fulfillment status in Shopify.
+- **Email** — Sends transactional email (for example with product recommendations) using your configured mail provider.
+
+In short: **your Shopify storefronts stay on Shopify; this service is the “engine room” for custom APIs, sync, and workflows** that your apps, partners, or internal tools call.
+
+## Who it is for
+
+- **Merchants and stakeholders** — Understand that this is not the customer-facing shop; it is the technical layer that powers integrations and automations behind the scenes.
+- **Developers and agencies** — Implement and extend routes under `src/app/api/`, configure stores in `constants/stores/`, and deploy like any Next.js app (commonly on Vercel).
+
+## What you get (at a glance)
+
+| Area | Purpose |
+|------|--------|
+| Multi-store support | One deployment can serve several Shopify brands with separate configuration. |
+| Validated APIs | Requests are checked (for example with Zod) before touching Shopify or external APIs. |
+| Scheduled tasks | Example: daily sync jobs (configured for deployment platforms that support cron). |
+| Security-minded design | Credentials live in environment variables; errors avoid leaking sensitive details. |
+
+## Running the project locally
+
+Prerequisites: [Node.js](https://nodejs.org/) and npm (or yarn/pnpm/bun).
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs at [http://localhost:3000](http://localhost:3000). **Most value is in the API routes** under `src/app/api/` rather than the default home page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build for production:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+Store names, domains, and credentials are managed in code and **environment variables**. Each store can have its own API keys, email settings, and integration endpoints. Your team sets these during deployment; they are not committed to the repository.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Further documentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For architecture, folder layout, patterns for new endpoints, and developer conventions, see **`CODEBASE_DOCUMENTATION.md`** in this repository.
 
-## Deploy on Vercel
+## Tech stack (summary)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js** (App Router) — API routes and deployment
+- **TypeScript** — Typed, maintainable code
+- **Shopify Admin API** — GraphQL via URQL / gql.tada
+- **Zod** — Request and data validation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+*This service is intended to be deployed to a secure environment (for example Vercel) with secrets configured there—not run exposed on the public internet without proper access control.*
