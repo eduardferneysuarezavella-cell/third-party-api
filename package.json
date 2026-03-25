@@ -1,0 +1,40 @@
+{
+  "name": "shopify-apis",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:strict": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+  },
+  "dependencies": {
+    "@shopify/shopify-app-remix": "^3.7.2",
+    "@urql/core": "^5.0.6",
+    "gql.tada": "^1.8.6",
+    "next": "14.2.5",
+    "nodemailer": "^6.9.14",
+    "react": "^18",
+    "react-dom": "^18",
+    "server-only": "^0.0.1",
+    "urql": "^4.1.0",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "@0no-co/graphqlsp": "^1.12.13",
+    "@gql.tada/cli-utils": "^1.6.1",
+    "@types/node": "^20",
+    "@types/nodemailer": "^6.4.15",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "graphql-config": "^5.1.2",
+    "prettier": "^3.6.2",
+    "typescript": "^5.2.2"
+  }
+}
